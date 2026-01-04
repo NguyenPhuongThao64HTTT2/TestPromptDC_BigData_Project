@@ -1,28 +1,233 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Big Data Project - NguyenPhuongThao64HTTT2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big Data Project - Nguyễn Phương Thảo</title>
+    <!-- Font chữ Inter xịn -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome cho biểu tượng -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 20px; background-color: #f4f4f4; }
-        .container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; }
-        .stats { background: #e8f6f3; padding: 15px; border-left: 5px solid #1abc9c; }
+        :root {
+            --primary: #0284c7;
+            --secondary: #0f172a;
+            --accent: #10b981;
+            --bg: #f1f5f9;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--secondary);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0;
+            background: linear-gradient(to right, #0ea5e9, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .info-badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 8px 20px;
+            border-radius: 99px;
+            font-weight: 600;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .student-name {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            color: #475569;
+        }
+
+        /* Thẻ kết quả 2 bộ dữ liệu */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+            border-color: var(--primary);
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card.private { border-left: 6px solid var(--accent); }
+        .card.public { border-left: 6px solid var(--primary); }
+
+        .metrics {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .metric-item {
+            text-align: left;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+        }
+
+        .metric-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        /* Benchmark Section */
+        .benchmark-box {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .benchmark-info i { color: #f59e0b; margin-right: 10px; }
+
+        /* Nút bấm footer */
+        .footer-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.2s;
+        }
+
+        .btn-github { background: var(--secondary); color: white; }
+        .btn-video { border: 2px solid var(--secondary); color: var(--secondary); }
+        
+        .btn:hover { opacity: 0.85; transform: scale(1.05); }
+
     </style>
 </head>
 <body>
-    <div class="container">
+
+<div class="container">
+    <div class="header">
         <h1>Dự án Phân tích dữ liệu lớn</h1>
-        <p><strong>Nhóm sinh viên thực hiện:</strong> Nguyen Phuong Thao và cộng sự</p>
-        <div class="stats">
-            <p><strong>Khối lượng dữ liệu xử lý:</strong> 44.03 GB (10GB Private + 34GB Public NYU)</p>
-            <p><strong>Mô hình:</strong> UniDepthV2 (Model C Fine-tuning)</p>
-            <p><strong>Kết quả MAE:</strong> 0.044366 | <strong>RMSE:</strong> 0.110806</p>
-        </div>
-        <p>Hệ thống MapReduce đã xử lý thành công hơn 53,000 file ảnh trên hạ tầng GPU Kaggle.</p>
-        <hr>
-        <a href="https://github.com/NguyenPhuongThao64HTTT2/TestPromptDC_BigData_Project">Xem mã nguồn chi tiết trên GitHub</a>
+        <div class="student-name">Sinh viên: <strong>Nguyễn Phương Thảo</strong></div>
+        <div class="info-badge">MSV: 2251162156 | Nhóm 6 | 64HTTT2</div>
     </div>
+
+    <div class="results-grid">
+        <!-- Dataset Private -->
+        <div class="card private">
+            <h2><i class="fas fa-lock"></i> Vietnam Traffic (Private)</h2>
+            <p style="color: #64748b; font-size: 0.85rem; margin-top: -10px;">Dung lượng: 10.03 GB | 5,249 ảnh</p>
+            <div class="metrics">
+                <div class="metric-item">
+                    <span class="metric-label">MAE Mean</span>
+                    <span class="metric-value">0.050558</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">RMSE Mean</span>
+                    <span class="metric-value">0.063200</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dataset Public -->
+        <div class="card public">
+            <h2><i class="fas fa-globe"></i> NYU Depth V2 (Public)</h2>
+            <p style="color: #64748b; font-size: 0.85rem; margin-top: -10px;">Dung lượng: 34 GB | 48,238 file H5</p>
+            <div class="metrics">
+                <div class="metric-item">
+                    <span class="metric-label">MAE Mean</span>
+                    <span class="metric-value">0.044366</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">RMSE Mean</span>
+                    <span class="metric-value">0.110806</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="benchmark-box">
+        <div class="benchmark-info">
+            <i class="fas fa-bolt"></i> 
+            Tốc độ xử lý MapReduce: <strong>1.8962 giây/ảnh</strong> trên hạ tầng GPU Kaggle.
+        </div>
+        <div style="font-size: 0.85rem; color: #64748b;">
+            Tổng Big Data: <strong>44.03 GB</strong>
+        </div>
+    </div>
+
+    <div class="footer-actions">
+        <a href="https://github.com/NguyenPhuongThao64HTTT2/TestPromptDC_BigData_Project" class="btn btn-github">
+            <i class="fab fa-github"></i> Xem GitHub
+        </a>
+        <a href="LINK_VIDEO_CUA_THAO" class="btn btn-video">
+            <i class="fas fa-play-circle"></i> Video Demo
+        </a>
+    </div>
+</div>
+
 </body>
 </html>
